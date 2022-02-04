@@ -186,7 +186,7 @@ internal class Program
 
             new Option<string>(
                 "--jsonf",
-                "When true, compress names for profile based hives."),
+                "When true, compress names for profile based hives. (Flattened 1-D json output)"),
             
             new Option<bool>(
                 "--details",
@@ -1341,7 +1341,7 @@ internal class Program
                                 Directory.CreateDirectory(json);
                             }
 
-                            var jso = BuildJson(key);
+                            
 
                             try
                             {
@@ -1352,10 +1352,14 @@ internal class Program
                                 {
                                     outFile = Path.Combine(json, Path.GetFileName(jsonf));
                                 }
+                                
 
                                 Log.Information("Saving key to json file {OutFile}",outFile);
                                 Console.WriteLine();
-                                File.WriteAllText(outFile, jso.ToJson());
+
+                                File.WriteAllText(outFile, "");
+                                BuildJson(key,outFile);
+                                //File.WriteAllText(outFile, jso.ToJson());
                             }
                             catch (Exception e)
                             {
@@ -2487,8 +2491,9 @@ internal class Program
         Environment.Exit(0);
     }
 
-    private static SimpleKey BuildJson(RegistryKey key)
+    private static void BuildJson(RegistryKey key, string filePath)
     {
+
         var sk = new SimpleKey
         {
             KeyName = key.KeyName,
@@ -2507,14 +2512,16 @@ internal class Program
             };
             sk.Values.Add(sv);
         }
+        File.AppendAllText(filePath, sk.ToJson()+"\n");
 
         foreach (var registryKey in key.SubKeys)
         {
-            var skk = BuildJson(registryKey);
-            sk.SubKeys.Add(skk);
+            BuildJson(registryKey,filePath);
+            //var skk = BuildJson(registryKey,fs);
+            //sk.SubKeys.Add(skk);
         }
 
-        return sk;
+        //return sk;
     }
 
     private static string StripInvalidCharsFromFileName(string initialFileName, string substituteWith)
