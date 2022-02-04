@@ -25,7 +25,7 @@
             csvf            File name to save CSV formatted results to. When present, overrides default name
             saveTo          Saves --vn value data in binary form to file. Expects path to a FILE
             json            Export --kn to directory specified by --json. Ignored when --vn is specified
-            jsonf           File name to save JSON formatted results to. When present, overrides default name
+            jsonf           File name to save JSON formatted results to. When present, overrides default name (Output is a flattened 1-D json output)
 
             details         Show more details when displaying results. Default is FALSE
 
