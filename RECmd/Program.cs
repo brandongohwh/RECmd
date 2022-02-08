@@ -226,6 +226,7 @@ internal class Program
                 () => false,
                 "If true, do not show data when using --sd or --ss"),
 
+
             new Option<bool>(
                 "--regex",
                 () => false,
@@ -2507,8 +2508,8 @@ internal class Program
                 ValueType = keyValue.ValueType,
                 ValueData = keyValue.ValueData,
                 ValueName = keyValue.ValueName,
-                DataRaw = keyValue.ValueDataRaw,
-                Slack = keyValue.ValueSlackRaw
+                //DataRaw = keyValue.ValueDataRaw,
+                //Slack = keyValue.ValueSlackRaw
             };
             sk.Values.Add(sv);
         }
