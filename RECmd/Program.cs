@@ -1954,7 +1954,7 @@ internal class Program
                     if (regVal != null)
                     {
                         Log.Information(
-                            "Found key {Path} and value {key.ValueName}!",Helpers.StripRootKeyNameFromKeyPath(regKey.KeyPath),key.ValueName);
+                            "Found key {Path} and value {ValueName}!",Helpers.StripRootKeyNameFromKeyPath(regKey.KeyPath),key.ValueName);
                     }
                     else
                     {
